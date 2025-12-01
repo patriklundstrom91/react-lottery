@@ -1,0 +1,10 @@
+version: "3.2"
+services:
+  sql-server-db:
+    container_name: lottery-server-db
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Password_4_Secure_ish_Database_&"
+      ACCEPT_EULA: "Y"
