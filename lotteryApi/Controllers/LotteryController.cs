@@ -19,4 +19,11 @@ public class LotteryController : ControllerBase
         await _context.SaveChangesAsync();
         return Ok(ticket);
     }
+
+    [HttpGet("draw")]
+    public IActionResult Draw()
+    {
+        var winningNumbers = Enumerable.Range(1, 9).OrderBy(x => Guid.NewGuid()).Take(4).ToArray();
+        return Ok(winningNumbers);
+    }
 }
