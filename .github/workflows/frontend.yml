@@ -3,7 +3,7 @@ name: Deploy React to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ["lottery/**"]
+    paths: ["lottery/**"] # ← Bara trigga vid ändringar i lottery/
   workflow_dispatch:
 
 permissions:
@@ -17,10 +17,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    # ← FIX: working-directory här INTE fungerar!
-    defaults: # ← LÄGG TILL detta
+    defaults:
       run:
-        working-directory: ./lottery # ← Nu gäller för ALLA run-steps
+        working-directory: ./lottery # ← Din React-mapp
     steps:
       - uses: actions/checkout@v4
 
@@ -41,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # Vite: dist, CRA: build
+          path: ./dist # Vite, eller ./build för CRA
 
       - name: Deploy to GitHub Pages
         id: deployment
